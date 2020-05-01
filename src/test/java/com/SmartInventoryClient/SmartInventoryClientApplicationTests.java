@@ -2,6 +2,7 @@ package com.SmartInventoryClient;
 
 import com.SmartInventoryClient.model.Memory;
 import com.SmartInventoryClient.model.Processor;
+import com.SmartInventoryClient.repository.MachineRepository;
 import com.SmartInventoryClient.service.InventoryService;
 import com.SmartInventoryClient.service.MachineDTO;
 import org.junit.Test;
@@ -19,6 +20,9 @@ public class SmartInventoryClientApplicationTests {
 
 	@Autowired
 	InventoryService inventoryService;
+
+	@Autowired
+	MachineRepository machineRepository;
 
 	@Test
 	public void updateProcessorTest() {
@@ -56,7 +60,13 @@ public class SmartInventoryClientApplicationTests {
 	@Test
 	public void getMachineTest(){
 		MachineDTO machineDTO = inventoryService.getMachineById(2);
-		System.out.println(machineDTO.getOperationalSystem().getName());
+		System.out.println("From remote :"+machineDTO.getOperationalSystem().getName());
+	}
+
+	@Test
+	public void getMachineFromFile(){
+		MachineDTO machineDTO = machineRepository.getMachineDTOFromFile();
+		System.out.println("From File :"+machineDTO.getOperationalSystem().getName());
 	}
 
 }
