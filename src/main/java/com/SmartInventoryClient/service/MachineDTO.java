@@ -1,6 +1,5 @@
 package com.SmartInventoryClient.service;
 
-
 import com.SmartInventoryClient.model.*;
 
 import java.util.List;

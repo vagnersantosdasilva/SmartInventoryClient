@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SmartInventoryClientApplicationTests {
@@ -65,8 +67,19 @@ public class SmartInventoryClientApplicationTests {
 
 	@Test
 	public void getMachineFromFile(){
-		MachineDTO machineDTO = machineRepository.getMachineDTOFromFile();
-		System.out.println("From File :"+machineDTO.getOperationalSystem().getName());
+		MachineDTO cacheInvenotry = machineRepository.getInventoryFromCache();
+		MachineDTO localInventory = machineRepository.getCurrentInventory();
+		System.out.println("From Cache :"+cacheInvenotry.getOperationalSystem().getName());
+		System.out.println("From File :"+localInventory.getOperationalSystem().getName());
+	}
+
+	@Test
+	public void saveCacheTest(){
+		MachineDTO machineDTO = inventoryService.getMachineById(2);
+		machineRepository.saveCacheInventory(machineDTO);
+		MachineDTO cacheInvenotry = machineRepository.getInventoryFromCache();
+		System.out.println("MachineID : "+cacheInvenotry.getOperationalSystem().getMachineId());
+
 	}
 
 }

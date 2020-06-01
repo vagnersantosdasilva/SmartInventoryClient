@@ -1,6 +1,7 @@
 package com.SmartInventoryClient.service;
 
 import com.SmartInventoryClient.model.*;
+import com.SmartInventoryClient.repository.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,9 @@ public class InventoryService {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    MachineRepository machineRepository;
 
     @Value("${machine.server}")
     String server;
@@ -52,5 +56,6 @@ public class InventoryService {
         MachineDTO machineDTO = (MachineDTO) responseEntity.getBody();
         return machineDTO;
     }
+
 
 }
