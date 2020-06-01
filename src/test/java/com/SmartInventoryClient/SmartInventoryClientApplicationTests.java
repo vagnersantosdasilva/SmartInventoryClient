@@ -2,6 +2,7 @@ package com.SmartInventoryClient;
 
 import com.SmartInventoryClient.model.Memory;
 import com.SmartInventoryClient.model.Processor;
+import com.SmartInventoryClient.repository.MachineRepository;
 import com.SmartInventoryClient.service.InventoryService;
 import com.SmartInventoryClient.service.MachineDTO;
 import org.junit.Test;
@@ -13,12 +14,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SmartInventoryClientApplicationTests {
 
 	@Autowired
 	InventoryService inventoryService;
+
+	@Autowired
+	MachineRepository machineRepository;
 
 	@Test
 	public void updateProcessorTest() {
@@ -56,7 +62,24 @@ public class SmartInventoryClientApplicationTests {
 	@Test
 	public void getMachineTest(){
 		MachineDTO machineDTO = inventoryService.getMachineById(2);
-		System.out.println(machineDTO.getOperationalSystem().getName());
+		System.out.println("From remote :"+machineDTO.getOperationalSystem().getName());
+	}
+
+	@Test
+	public void getMachineFromFile(){
+		MachineDTO cacheInvenotry = machineRepository.getInventoryFromCache();
+		MachineDTO localInventory = machineRepository.getCurrentInventory();
+		System.out.println("From Cache :"+cacheInvenotry.getOperationalSystem().getName());
+		System.out.println("From File :"+localInventory.getOperationalSystem().getName());
+	}
+
+	@Test
+	public void saveCacheTest(){
+		MachineDTO machineDTO = inventoryService.getMachineById(2);
+		machineRepository.saveCacheInventory(machineDTO);
+		MachineDTO cacheInvenotry = machineRepository.getInventoryFromCache();
+		System.out.println("MachineID : "+cacheInvenotry.getOperationalSystem().getMachineId());
+
 	}
 
 }
