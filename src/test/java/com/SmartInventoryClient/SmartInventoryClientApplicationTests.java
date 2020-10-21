@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,7 +26,7 @@ public class SmartInventoryClientApplicationTests {
 
 	@Autowired
 	MachineRepository machineRepository;
-
+/*
 	@Test
 	public void updateProcessorTest() {
 
@@ -42,7 +43,7 @@ public class SmartInventoryClientApplicationTests {
 	}
 
 	@Test
-	public void updateMemorysTest(){
+	public void updateMemorysTest() {
 
 		List<Memory> memoryList = inventoryService.getMachineById(2).getMemorys();
 		Memory newMemory = new Memory();
@@ -79,6 +80,18 @@ public class SmartInventoryClientApplicationTests {
 		machineRepository.saveCacheInventory(machineDTO);
 		MachineDTO cacheInvenotry = machineRepository.getInventoryFromCache();
 		System.out.println("MachineID : "+cacheInvenotry.getOperationalSystem().getMachineId());
+
+	}
+*/
+		@Test
+		public void checkChange() {
+			MachineDTO machineLocal = machineRepository.getInventoryFromCache();
+			MachineDTO machineRemote = machineRepository.getCurrentInventory();
+
+			System.out.println("Memorias local  :"+machineLocal.getMemorys().size());
+			System.out.println("Memorias remoto :"+machineRemote.getMemorys().size());
+			System.out.println("Invent. iguais  ? "+(machineLocal.equals(machineRemote)));
+
 
 	}
 

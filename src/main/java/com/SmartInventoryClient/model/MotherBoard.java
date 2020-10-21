@@ -1,5 +1,7 @@
 package com.SmartInventoryClient.model;
 
+import java.util.Objects;
+
 public class MotherBoard   {
 
 
@@ -70,4 +72,16 @@ public class MotherBoard   {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MotherBoard that = (MotherBoard) o;
+        return Objects.equals(getManufacturer(), that.getManufacturer()) &&
+                Objects.equals(getProduct(), that.getProduct()) &&
+                Objects.equals(getSerialNumber(), that.getSerialNumber()) &&
+                Objects.equals(getStatus(), that.getStatus());
+    }
+
 }

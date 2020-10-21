@@ -1,9 +1,9 @@
 {
-  "id":null,
+  "id": 4,
   "memorys": [
     {
-      "id":null,
-      "machineId":null,
+      "id": 4,
+      "machineId": 4,
       "manufacturer": "Kingston",
       "type": "DDR3",
       "size": 4000,
@@ -13,8 +13,8 @@
     }
   ],
   "processor": {
-    "id":null,
-    "machineId":null,
+    "id": 4,
+    "machineId": 4,
     "name": "AMD 840",
     "architeture": 64,
     "maxClock": 3600,
@@ -24,8 +24,8 @@
   },
   "softwares": [
     {
-      "id": null,
-      "machineId":null,
+      "id": 7,
+      "machineId": 4,
       "name": "Microsoft Office 2007",
       "version": "2007",
       "arquiteture": "64",
@@ -37,8 +37,8 @@
       "deleteDate": null
     },
     {
-      "id": null,
-      "machineId":null,
+      "id": 8,
+      "machineId": 4,
       "name": "Google Chrome",
       "version": "79",
       "arquiteture": "64",
@@ -51,16 +51,16 @@
     }
   ],
   "motherBoard": {
-    "id":null,
-    "machineId":null,
+    "id": 4,
+    "machineId": 4,
     "manufacturer": "Giga Byte",
     "product": "MT-S2-MA",
     "serialNumber": "1A23332R2",
     "status": "OK"
   },
   "operationalSystem": {
-    "id":null,
-    "machineId":null,
+    "id": 4,
+    "machineId": 4,
     "name": "MS WINDOWS 7",
     "sysUpdate": "6.1",
     "hostname": "NAV-WIN-7",

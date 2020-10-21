@@ -1,6 +1,8 @@
 package com.SmartInventoryClient.model;
 
 
+import java.util.Objects;
+
 public class Processor  {
 
 
@@ -88,4 +90,19 @@ public class Processor  {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Processor processor = (Processor) o;
+        return getName().equals(processor.getName()) &&
+                Objects.equals(getArchiteture(), processor.getArchiteture()) &&
+                Objects.equals(getMaxClock(), processor.getMaxClock()) &&
+                Objects.equals(getCores(), processor.getCores()) &&
+                Objects.equals(getManufacturer(), processor.getManufacturer()) &&
+                Objects.equals(getStatus(), processor.getStatus());
+    }
+
+
 }
