@@ -18,14 +18,14 @@ public class ExtractAppsInfoService {
 
     public List<AppsDTO> getListApps(){
         try{
-            List<String> ls = Command.runFromRoot("sudo ls /usr/share/applications/", "#F1a2c5h4_nvl");
+            List<String> ls = Command.runFromRoot("sudo ls /usr/share/applications/", "my_password_root");
             System.out.println("Primeira lista de arquivos QTD:"+ls.size());
             List<AppsDTO> apps = new ArrayList<>();
             ls.sort(String::compareTo);
             for( String s:ls){
                 List<String> returnCommand  = Command
                         .runFromRoot( "sudo cat /usr/share/applications/"
-                                .concat(s.trim()),"#F1a2c5h4_nvl");
+                                .concat(s.trim()),"my_password_root");
                 AppsDTO app = (AppsDTO)beanUtilsReflection.returnBean(returnCommand,AppsDTO.class,"=");
                 apps.add(app);
             }
