@@ -1,12 +1,14 @@
 package com.SmartInventoryClient.util;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class BeanUtilReflection {
     /*O objetivo dessa classe é preencher um objeto com as propriedades vindas
     * de um retorno de um comando do terminal linux.

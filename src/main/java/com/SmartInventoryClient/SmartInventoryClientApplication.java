@@ -2,6 +2,7 @@ package com.SmartInventoryClient;
 
 
 
+import com.SmartInventoryClient.util.BeanUtilReflection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,9 @@ public class SmartInventoryClientApplication {
 	public RestTemplate restTemplate(){
 		return new RestTemplate();
 	}
+
+	@Bean
+	public BeanUtilReflection beanUtilReflection(){ return new BeanUtilReflection();}
 
 
 
