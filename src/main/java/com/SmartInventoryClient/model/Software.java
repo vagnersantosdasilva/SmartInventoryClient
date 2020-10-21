@@ -1,7 +1,7 @@
 package com.SmartInventoryClient.model;
 
 import java.io.Serializable;
-
+import java.util.Objects;
 
 
 public class Software implements Serializable {
@@ -126,5 +126,26 @@ public class Software implements Serializable {
 
     public void setDeleteDate(String deleteDate) {
         this.deleteDate = deleteDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Software software = (Software) o;
+        return isDeleted() == software.isDeleted() &&
+                getName().equals(software.getName()) &&
+                Objects.equals(getVersion(), software.getVersion()) &&
+                Objects.equals(getArquiteture(), software.getArquiteture()) &&
+                Objects.equals(getCollection(), software.getCollection()) &&
+                Objects.equals(getInstallDate(), software.getInstallDate()) &&
+                Objects.equals(getUninstallLocation(), software.getUninstallLocation()) &&
+                Objects.equals(getInstallLocation(), software.getInstallLocation()) &&
+                Objects.equals(getDeleteDate(), software.getDeleteDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getVersion(), getArquiteture(), getCollection(), getInstallDate(), getUninstallLocation(), getInstallLocation(), isDeleted(), getDeleteDate());
     }
 }

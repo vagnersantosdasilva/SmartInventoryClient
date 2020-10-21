@@ -1,7 +1,6 @@
 package com.SmartInventoryClient.service;
 
 import com.SmartInventoryClient.model.*;
-
 import java.util.List;
 
 public class MachineDTO {
@@ -72,4 +71,17 @@ public class MachineDTO {
     public void setOperacionalSystem(OperationalSystem operationalSystem) {
         this.operationalSystem = operationalSystem;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MachineDTO that = (MachineDTO) o;
+        return  getProcessor().equals(that.getProcessor()) &&
+                getMotherBoard().equals(that.getMotherBoard()) &&
+                getOperationalSystem().equals(that.getOperationalSystem()) &&
+                getSoftwares().equals(that.getSoftwares()) &&
+                getMemorys().equals(that.getMemorys()) ;
+    }
+
 }

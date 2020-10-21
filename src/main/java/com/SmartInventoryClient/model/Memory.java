@@ -1,6 +1,7 @@
 package com.SmartInventoryClient.model;
 
 
+import java.util.Objects;
 
 public class Memory{
 
@@ -83,4 +84,19 @@ public class Memory{
     public boolean isRemoved() { return removed;}
 
     public void setRemoved(boolean removed) {  this.removed = removed;  }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Memory memory = (Memory) o;
+        return isRemoved() == memory.isRemoved() &&
+                Objects.equals(getManufacturer(), memory.getManufacturer()) &&
+                Objects.equals(getType(), memory.getType()) &&
+                getSize().equals(memory.getSize()) &&
+                Objects.equals(getFrequency(), memory.getFrequency()) &&
+                Objects.equals(getSlot(), memory.getSlot());
+    }
+
+
 }

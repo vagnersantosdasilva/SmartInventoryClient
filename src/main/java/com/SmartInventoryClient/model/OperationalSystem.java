@@ -1,5 +1,7 @@
 package com.SmartInventoryClient.model;
 
+import java.util.Objects;
+
 public class OperationalSystem  {
 
     private Integer id;
@@ -108,4 +110,18 @@ public class OperationalSystem  {
     public void setLastBoot(String lastBoot) {
         this.lastBoot = lastBoot;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OperationalSystem that = (OperationalSystem) o;
+        return getName().equals(that.getName()) &&
+                Objects.equals(getSysUpdate(), that.getSysUpdate()) &&
+                getHostname().equals(that.getHostname()) &&
+                Objects.equals(getStatus(), that.getStatus()) &&
+                Objects.equals(getVersion(), that.getVersion()) &&
+                Objects.equals(getInstallDate(), that.getInstallDate());
+    }
+
 }
