@@ -14,7 +14,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AppTest {
+public class ExtractAppsInfoServiceTest {
 
     @Autowired
     private ExtractAppsInfoService extractAppsInfoService ;
