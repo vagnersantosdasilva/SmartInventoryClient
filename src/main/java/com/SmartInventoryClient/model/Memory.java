@@ -11,12 +11,13 @@ public class Memory{
     private String type;
     private Integer size;
     private Integer frequency;
-
+    private String serialNumber;
     private String slot;
     private boolean removed;
 
 
-    public Memory(Integer id, Integer machineId, String manufacturer, String type, Integer size, Integer frequency,String slot, boolean removed ) {
+
+    public Memory(Integer id, Integer machineId, String manufacturer, String type, Integer size, Integer frequency, String slot, String serialNumber, boolean removed ) {
 
         this.machineId = machineId;
         this.manufacturer = manufacturer;
@@ -25,6 +26,8 @@ public class Memory{
         this.frequency = frequency;
         this.removed = removed;
         this.slot = slot;
+        this.serialNumber = serialNumber;
+
     }
     public Memory(){}
 
@@ -83,6 +86,15 @@ public class Memory{
     public boolean isRemoved() { return removed;}
 
     public void setRemoved(boolean removed) {  this.removed = removed;  }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
 
     @Override
     public boolean equals(Object o) {

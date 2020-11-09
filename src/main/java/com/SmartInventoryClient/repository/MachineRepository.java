@@ -1,6 +1,6 @@
 package com.SmartInventoryClient.repository;
 
-import com.SmartInventoryClient.service.MachineDTO;
+import com.SmartInventoryClient.service.DTO.MachineDTO;
 
 
 public interface MachineRepository {

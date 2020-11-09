@@ -1,17 +1,18 @@
 package com.SmartInventoryClient.service;
 
 import com.SmartInventoryClient.command.Command;
-import com.SmartInventoryClient.service.DTO.MotherBoardDTO;
+import com.SmartInventoryClient.service.DTO.StorageUnitDTO;
 import com.SmartInventoryClient.util.BeanUtilReflection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ExtractMotherBoardInfoService {
+public class StorageUnitInfoService {
 
     @Autowired
     BeanUtilReflection beanUtilReflection;
@@ -19,18 +20,22 @@ public class ExtractMotherBoardInfoService {
     @Value("${password}")
     String pass;
 
-
-    public MotherBoardDTO getMotherBoardDTO(){
+    public List<StorageUnitDTO> getListStorageUnit() {
         try {
-            List<String> returnCommand = Command.runFromRoot("sudo dmidecode -t 2", pass.trim())
+            List<String> returnCommand = Command.runFromRoot("sudo sh scripts/disks.sh ;sudo sh scripts/transformer.sh ",pass.trim())
                     .stream()
-                    .filter(e-> e.contains(":"))
+                    .filter(e -> e.contains(":"))
                     .collect(Collectors.toList());
-            MotherBoardDTO mb = (MotherBoardDTO)beanUtilReflection.returnBean(returnCommand,MotherBoardDTO.class,":");
-            return mb;
+            List<Object> listObject = beanUtilReflection.returnListBean(returnCommand,StorageUnitDTO.class,":");
+
+            return listObject.stream()
+                    .map(e->(StorageUnitDTO)e)
+                    .collect(Collectors.toList());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  new MotherBoardDTO();
+        return new ArrayList<StorageUnitDTO>();
     }
+
 }

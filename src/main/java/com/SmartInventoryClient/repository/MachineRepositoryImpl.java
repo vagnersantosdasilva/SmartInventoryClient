@@ -1,6 +1,6 @@
 package com.SmartInventoryClient.repository;
 
-import com.SmartInventoryClient.service.MachineDTO;
+import com.SmartInventoryClient.service.DTO.MachineDTO;
 import com.SmartInventoryClient.util.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;

@@ -3,9 +3,7 @@ package com.SmartInventoryClient.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-
 public class Software implements Serializable {
-
 
     private Integer id;
     private Integer machineId;
@@ -18,26 +16,7 @@ public class Software implements Serializable {
     private String installLocation;
     private boolean deleted;
     private String deleteDate;
-
-
-    public Software(Integer id, Integer machineId, String name, String version, String arquiteture,
-                    Boolean collection, String installDate, String uninstallLocation,
-                    String installLocation, boolean deleted, String deleteDate) {
-        this.id = id;
-        this.machineId = machineId;
-        this.name = name;
-        this.version = version;
-        this.arquiteture = arquiteture;
-        this.collection = collection;
-        this.installDate = installDate;
-        this.uninstallLocation = uninstallLocation;
-        this.installLocation = installLocation;
-        this.deleted=deleted;
-        this.deleteDate=deleteDate;
-
-    }
-
-    public Software(){}
+    private String categories;
 
 
     public Integer getId() {
@@ -127,6 +106,35 @@ public class Software implements Serializable {
     public void setDeleteDate(String deleteDate) {
         this.deleteDate = deleteDate;
     }
+
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
+
+    public Software(Integer id, Integer machineId, String name, String version, String arquiteture,
+                    Boolean collection, String installDate, String uninstallLocation,
+                    String installLocation, boolean deleted, String deleteDate,String categories) {
+        this.id = id;
+        this.machineId = machineId;
+        this.name = name;
+        this.version = version;
+        this.arquiteture = arquiteture;
+        this.collection = collection;
+        this.installDate = installDate;
+        this.uninstallLocation = uninstallLocation;
+        this.installLocation = installLocation;
+        this.deleted=deleted;
+        this.deleteDate=deleteDate;
+        this.categories=categories;
+
+    }
+
+    public Software(){}
+
 
     @Override
     public boolean equals(Object o) {

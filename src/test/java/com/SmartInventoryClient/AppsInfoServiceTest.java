@@ -1,12 +1,11 @@
 package com.SmartInventoryClient;
 
-import com.SmartInventoryClient.service.DTO.AppsDTO;
-import com.SmartInventoryClient.service.ExtractAppsInfoService;
+import com.SmartInventoryClient.model.Software;
+import com.SmartInventoryClient.service.AppsInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -14,22 +13,22 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ExtractAppsInfoServiceTest {
+public class AppsInfoServiceTest {
 
     @Autowired
-    private ExtractAppsInfoService extractAppsInfoService ;
+    private AppsInfoService extractAppsInfoService ;
 
     @Test
     public void testApps() throws IOException {
-      List<AppsDTO> apps = extractAppsInfoService.getListApps();
+      List<Software> apps = extractAppsInfoService.getListApps();
       if (apps!=null){
-          for(AppsDTO app : apps) {
+          for(Software app : apps) {
               if (app.getName() != null) {
                   System.out.println("Name :" + app.getName());
-                  System.out.println("Comments :" + app.getComment());
+                  System.out.println("Comments :" + "");
                   System.out.println("Categories :" + app.getCategories());
                   System.out.println("Version :" + app.getVersion());
-                  System.out.println("Exec :" + app.getExec());
+                  System.out.println("Exec :" + app.getInstallLocation());
                   System.out.println("");
               }
           }

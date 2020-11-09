@@ -1,7 +1,7 @@
 package com.SmartInventoryClient;
 
 import com.SmartInventoryClient.service.DTO.StorageUnitDTO;
-import com.SmartInventoryClient.service.ExtractStorageUnitInfoService;
+import com.SmartInventoryClient.service.StorageUnitInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +12,15 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ExtractStorageUnitInfoServiceTest {
+public class StorageUnitInfoServiceTest {
 
     @Autowired
-    ExtractStorageUnitInfoService extractStorageUnitInfoService;
+    StorageUnitInfoService storageUnitInfoService;
 
     @Test
     public void testServiceDisk(){
 
-        List<StorageUnitDTO> diskDTOList = extractStorageUnitInfoService.getListStorageUnit();
+        List<StorageUnitDTO> diskDTOList = storageUnitInfoService.getListStorageUnit();
         for (StorageUnitDTO disk : diskDTOList){
 
             System.out.println();

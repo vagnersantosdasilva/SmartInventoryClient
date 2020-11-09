@@ -3,7 +3,7 @@ import com.SmartInventoryClient.model.Memory;
 import com.SmartInventoryClient.model.OperationalSystem;
 import com.SmartInventoryClient.model.Software;
 import com.SmartInventoryClient.repository.MachineRepository;
-import com.SmartInventoryClient.service.MachineDTO;
+import com.SmartInventoryClient.service.DTO.MachineDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.executable.ValidateOnExecution;
@@ -30,7 +30,7 @@ public class ChangeMonitorFacade {
         MachineDTO remoteInventory = machineRepository.getInventoryFromCache();
         if (!currentInventory.equals(remoteInventory)) {
             List<Software> softwareList = currentInventory.getSoftwares();
-            List<Memory> memoryList = currentInventory.getMemorys();
+            List<Memory> memoryList = currentInventory.getMemories();
             OperationalSystem op = currentInventory.getOperationalSystem();
             
         }

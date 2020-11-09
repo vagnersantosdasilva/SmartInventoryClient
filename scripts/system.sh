@@ -1,0 +1,1 @@
+uptime |awk -F " " '{print "now="$1 "\n"  "uptime =" $3}'; lsb_release -a|awk '{ gsub(":","="); print $1 $2 $3}';cat /etc/hostname |awk '{print "hostname = " $1 $2}'

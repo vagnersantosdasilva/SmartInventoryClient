@@ -1,16 +1,12 @@
 package com.SmartInventoryClient.service;
 
-import com.SmartInventoryClient.model.*;
 import com.SmartInventoryClient.repository.MachineRepository;
+import com.SmartInventoryClient.service.DTO.MachineDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @Service
 public class InventoryService {
@@ -21,30 +17,34 @@ public class InventoryService {
     @Autowired
     MachineRepository machineRepository;
 
+    @Autowired
+    MemoryInfoService memoryInfoService;
+
+    @Autowired
+    MotherBoardInfoService motherBoardInfoService;
+
+    @Autowired
+    AppsInfoService appsInfoService;
+
+    @Autowired
+    StorageUnitInfoService storageUnitInfoService;
+
+
+
     @Value("${machine.server}")
     String server;
 
+    public MachineDTO createInvetory(MachineDTO machineDTO){
+        ResponseEntity<MachineDTO> responseEntity = restTemplate.exchange(server+"/machine/create",HttpMethod.POST,
+                new HttpEntity<>(machineDTO,createJSONHeader()),MachineDTO.class);
 
-    public void updateProcessor(Processor processor) {
-
-        restTemplate.put(server+"/processor/update", processor);
+        return responseEntity.getBody();
     }
 
-    public void updateMemory(List<Memory> listMemory){
-
-        restTemplate.put(server+"/memory/update",listMemory);
-    }
-
-    public void motherBoardUpdate(MotherBoard motherBoard){
-        restTemplate.put(server+"/mother_board/update",motherBoard);
-    }
-
-    public void updateOS(OperationalSystem os){
-        restTemplate.put(server+"/operational_system/update",os);
-    }
-
-    public void updateSoftwares(List<Software> softwareList){
-        restTemplate.put(server+"/softwares/update",softwareList);
+    private static HttpHeaders createJSONHeader(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
     }
 
     public MachineDTO getMachineById(Integer machineId){
@@ -56,6 +56,5 @@ public class InventoryService {
         MachineDTO machineDTO = (MachineDTO) responseEntity.getBody();
         return machineDTO;
     }
-
 
 }

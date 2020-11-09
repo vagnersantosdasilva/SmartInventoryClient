@@ -1,6 +1,6 @@
 package com.SmartInventoryClient.util;
 
-import com.SmartInventoryClient.service.MachineDTO;
+import com.SmartInventoryClient.service.DTO.MachineDTO;
 import com.google.gson.Gson;
 
 import java.io.*;
