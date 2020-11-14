@@ -24,6 +24,5 @@ public class OperationalSystemInfoServiceTest {
         System.out.println("Update : "+op.getUpdate());
         System.out.println("Version "+op.getVersion());
         System.out.println("Last Boot :"+op.getLastBoot());
-
     }
 }

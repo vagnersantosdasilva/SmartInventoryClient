@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -39,6 +40,18 @@ public class InventoryService {
                 new HttpEntity<>(machineDTO,createJSONHeader()),MachineDTO.class);
 
         return responseEntity.getBody();
+    }
+
+    public void updateInventory(MachineDTO machineDTO){
+        try {
+            HttpEntity<MachineDTO> requestEntity = new HttpEntity<MachineDTO>(machineDTO, createJSONHeader());
+            ResponseEntity<MachineDTO> updateInventoryResponse = restTemplate.exchange(server + "machine/update/{id}", HttpMethod.PUT, requestEntity, MachineDTO.class, machineDTO.getId());
+            //gerar um log aqui
+            System.out.println(updateInventoryResponse.getStatusCode());
+        }catch(HttpStatusCodeException ex){
+            System.out.println(ex.getMessage());
+
+        }
     }
 
     private static HttpHeaders createJSONHeader(){

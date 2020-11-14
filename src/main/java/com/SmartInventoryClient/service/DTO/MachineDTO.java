@@ -84,16 +84,19 @@ public class MachineDTO {
         this.storageUnits = storageUnits;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MachineDTO that = (MachineDTO) o;
-        return  getProcessor().equals(that.getProcessor()) &&
-                getMotherBoard().equals(that.getMotherBoard()) &&
-                getOperationalSystem().equals(that.getOperationalSystem()) ;
+
+        return  (getProcessor()==null?that.getProcessor()==null:getProcessor().equals(that.getProcessor())) &&
+                (getMotherBoard()==null?that.getMotherBoard()==null:getMotherBoard().equals(that.getMotherBoard())) &&
+                (getOperationalSystem()==null? that.getOperationalSystem()==null:getOperationalSystem().equals(that.getOperationalSystem())) &&
+                (getMemories()==null?that.getMemories()==null:getMemories().equals(that.getMemories())) &&
+                (getStorageUnits()==null?that.getStorageUnits()==null:getStorageUnits().equals(that.getStorageUnits()))&&
+                (getSoftwares()==null?that.getSoftwares()==null:getSoftwares().equals(that.getSoftwares()));
     }
+
 
 }

@@ -95,6 +95,10 @@ public class Memory{
         this.serialNumber = serialNumber;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getManufacturer(), getType(), getSize(), getFrequency(), getSerialNumber(), getSlot(), isRemoved());
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -106,7 +110,8 @@ public class Memory{
                 Objects.equals(getType(), memory.getType()) &&
                 getSize().equals(memory.getSize()) &&
                 Objects.equals(getFrequency(), memory.getFrequency()) &&
-                Objects.equals(getSlot(), memory.getSlot());
+                Objects.equals(getSlot(), memory.getSlot()) &&
+                Objects.equals(getSerialNumber(), memory.getSerialNumber());
     }
 
 

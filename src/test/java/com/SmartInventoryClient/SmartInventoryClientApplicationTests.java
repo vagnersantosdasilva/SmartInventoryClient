@@ -34,7 +34,7 @@ public class SmartInventoryClientApplicationTests {
 	@Autowired
 	ProcessorInfoService processorInfoService;
 
-
+/*
 	@Test
 	public void createMachineTest(){
 		MachineDTO machineDTO = new MachineDTO();
@@ -43,45 +43,32 @@ public class SmartInventoryClientApplicationTests {
 		machineDTO.setMemories(memoryInfoService.getListMemorys());
 		machineDTO.setSoftwares(appsInfoService.getListApps());
 		machineDTO.setProcessor(processorInfoService.getProcessor());
+
 		MachineDTO machine = inventoryService.createInvetory(machineDTO);
+		machineRepository.saveCacheInventory(machine);
+		machineRepository.saveCurrentInventory(machineDTO);
+
 
 		System.out.println(machine.getId());
-	}
 
+		assertEquals(machine.getMotherBoard(),machineDTO.getMotherBoard());
+		assertEquals(machine.getOperationalSystem(),machineDTO.getOperationalSystem());
+		assertEquals(machine.getProcessor(),machineDTO.getProcessor());
+		assertEquals(machineRepository.getCurrentInventory(),machineRepository.getInventoryFromCache());
+		System.out.println(machine.equals(machineDTO));
+	}*/
+
+
+	@Test
+	public void updateMachine(){
+
+		MachineDTO remoteMachine = machineRepository.getInventoryFromCache();
+		MachineDTO localMachine = machineRepository.getCurrentInventory();
+		System.out.println(remoteMachine.equals(localMachine));
+
+
+	}
 	/*
-	@Test
-	public void updateProcessorTest() {
-
-		Processor processor = new Processor();
-		processor.setId(2);
-		processor.setMachineId(2);
-		processor.setName("Intel Pentium 4");
-		processor.setArchiteture(64);
-		processor.setCores(1);
-		processor.setManufacturer("Intel");
-		processor.setMaxClock(4000);
-		processor.setStatus("OK");
-		inventoryService.updateProcessor(processor);
-	}
-
-	@Test
-	public void updateMemorysTest() {
-
-		List<Memory> memoryList = inventoryService.getMachineById(2).getMemorys();
-		Memory newMemory = new Memory();
-		newMemory.setId(null);
-		newMemory.setFrequency(800);
-		newMemory.setMachineId(2);
-		newMemory.setManufacturer("Kingston");
-		newMemory.setRemoved(false);
-		newMemory.setSize(4000);
-		newMemory.setType("DDR3");
-		newMemory.setSlot(("A2"));
-
-		memoryList.add(newMemory);
-		inventoryService.updateMemory(memoryList);
-	}
-
 	@Test
 	public void getMachineTest(){
 		MachineDTO machineDTO = inventoryService.getMachineById(2);
@@ -105,17 +92,13 @@ public class SmartInventoryClientApplicationTests {
 
 	}
 
-		@Test
-		public void checkChange() {
-			MachineDTO machineLocal = machineRepository.getInventoryFromCache();
-			MachineDTO machineRemote = machineRepository.getCurrentInventory();
-
-			System.out.println("Memorias local  :"+machineLocal.getMemorys().size());
-			System.out.println("Memorias remoto :"+machineRemote.getMemorys().size());
-			System.out.println("Invent. iguais  ? "+(machineLocal.equals(machineRemote)));
+	@Test
+	public void checkChange() {
+		MachineDTO machineLocal = machineRepository.getInventoryFromCache();
+		MachineDTO machineRemote = machineRepository.getCurrentInventory();
 
 
-	}
-	*/
+	}*/
+
 
 }
