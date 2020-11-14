@@ -96,7 +96,7 @@ public class Processor  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Processor processor = (Processor) o;
-        return getName().equals(processor.getName()) &&
+        return  Objects.equals(getName(),processor.getName()) &&
                 Objects.equals(getArchiteture(), processor.getArchiteture()) &&
                 Objects.equals(getMaxClock(), processor.getMaxClock()) &&
                 Objects.equals(getCores(), processor.getCores()) &&

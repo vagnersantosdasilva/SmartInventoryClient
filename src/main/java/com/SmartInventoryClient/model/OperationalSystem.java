@@ -116,9 +116,9 @@ public class OperationalSystem  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OperationalSystem that = (OperationalSystem) o;
-        return getName().equals(that.getName()) &&
+        return  Objects.equals(getName(),that.getName()) &&
                 Objects.equals(getSysUpdate(), that.getSysUpdate()) &&
-                getHostname().equals(that.getHostname()) &&
+                Objects.equals(getHostname(),that.getHostname()) &&
                 Objects.equals(getStatus(), that.getStatus()) &&
                 Objects.equals(getVersion(), that.getVersion()) &&
                 Objects.equals(getInstallDate(), that.getInstallDate());

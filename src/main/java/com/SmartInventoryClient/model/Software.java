@@ -142,7 +142,7 @@ public class Software implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Software software = (Software) o;
         return isDeleted() == software.isDeleted() &&
-                getName().equals(software.getName()) &&
+                Objects.equals(getName(),software.getName()) &&
                 Objects.equals(getVersion(), software.getVersion()) &&
                 Objects.equals(getArquiteture(), software.getArquiteture()) &&
                 Objects.equals(getCollection(), software.getCollection()) &&
