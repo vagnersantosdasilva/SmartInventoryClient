@@ -14,6 +14,7 @@ public class BeanUtilReflection {
     * de um retorno de um comando do terminal linux.
     */
 
+    /*BUG  : Quando a lista de propriedades tem apenas um objeto sem repetição , a lista de retorno não é preenchida*/
     private BeanUtils beansUtils = new BeanUtils();
     private String separator;
 
@@ -48,6 +49,7 @@ public class BeanUtilReflection {
         int start = 0;
         int count =0;
         int end = firstRepeat(lines)-1;
+        if (firstRepeat(lines)-1<=0) end = lines.size()-1;
         for (int i = start ; i<=end;i++){
             for (int j = 0 ; j<=fields.length-1;j++){
                 if (extractKeyLowerCase(lines.get(i)).equals(fields[j].getName().toLowerCase())){
@@ -78,7 +80,7 @@ public class BeanUtilReflection {
         String key = extractKeyLowerCase(list.get(0));
         int count = 0;
         int index = 0 ;
-        for (int i=0 ; i<=list.size();i++){
+        for (int i=0 ; i<=list.size()-1;i++){
             if  (extractKeyLowerCase(list.get(i)).toLowerCase().equals(key)) count++;
             if (count ==2){
                 index = i;

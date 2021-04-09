@@ -14,6 +14,9 @@ public class MachineRepositoryImpl implements MachineRepository {
     @Value("${remote_inventory}")
     String remoteMachine;
 
+    @Value("${historical}")
+    String historical;
+
     @Override
     public boolean saveCurrentInventory(MachineDTO machineDTO) {
 
@@ -28,6 +31,12 @@ public class MachineRepositoryImpl implements MachineRepository {
     }
 
     @Override
+    public boolean saveHistorical(MachineDTO machineDTO) {
+        if (FileUtil.fileJSONWriter(machineDTO,historical)) return true;
+        return false;
+    }
+
+    @Override
     public MachineDTO getInventoryFromCache() {
         MachineDTO machineDTO = (MachineDTO) FileUtil.fileJSONRead(remoteMachine);
         return machineDTO;
@@ -37,5 +46,10 @@ public class MachineRepositoryImpl implements MachineRepository {
     public MachineDTO getCurrentInventory() {
         MachineDTO machineDTO = (MachineDTO) FileUtil.fileJSONRead(currentMachine);
         return machineDTO;
+    }
+
+    @Override
+    public MachineDTO getHistorical() {
+        return (MachineDTO) FileUtil.fileJSONRead(currentMachine);
     }
 }

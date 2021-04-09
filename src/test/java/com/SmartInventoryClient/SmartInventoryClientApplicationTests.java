@@ -1,5 +1,6 @@
 package com.SmartInventoryClient;
 
+import com.SmartInventoryClient.model.Memory;
 import com.SmartInventoryClient.repository.MachineRepository;
 import com.SmartInventoryClient.service.*;
 import com.SmartInventoryClient.service.DTO.MachineDTO;
@@ -8,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -56,19 +59,54 @@ public class SmartInventoryClientApplicationTests {
 		assertEquals(machine.getProcessor(),machineDTO.getProcessor());
 		assertEquals(machineRepository.getCurrentInventory(),machineRepository.getInventoryFromCache());
 		System.out.println(machine.equals(machineDTO));
-	}*/
+	}
+*/
+	private MachineDTO setId(MachineDTO receiver,MachineDTO send ){
+		receiver.setId(send.getId());
+		receiver.getProcessor().setId(send.getId());
+		receiver.getMotherBoard().setId(send.getId());
+		//receiver.getOperationalSystem().setId(send.getId());
+		receiver.getMemories().stream()
+				.map( e -> {
+					int i = send.getMemories().indexOf(e);
+					e.setId(send.getMemories().get(i).getId());
+					e.setMachineId(send.getMemories().get(i).getMachineId());
+					return e;
+				}).collect(Collectors.toList());
 
+		receiver.getSoftwares().stream()
+				.map(e-> {
+					int i = send.getSoftwares().indexOf(e);
+					e.setId(send.getSoftwares().get(i).getId());
+					e.setMachineId(send.getSoftwares().get(i).getMachineId());
+					return e;
+				}).collect(Collectors.toList());
+		
+		return  receiver;
+	}
 
 	@Test
 	public void updateMachine(){
 
 		MachineDTO remoteMachine = machineRepository.getInventoryFromCache();
 		MachineDTO localMachine = machineRepository.getCurrentInventory();
-		System.out.println(remoteMachine.equals(localMachine));
-
+		if (!remoteMachine.equals(localMachine)) {
+			localMachine = setId(localMachine, remoteMachine);
+			for (Memory m : localMachine.getMemories()){
+				System.out.println("Slot :" +m.getSlot() +" ---- id :"+ m.getId());
+				System.out.println("mid :"+m.getMachineId());
+			}
+			System.out.println();
+			for (Memory m : remoteMachine.getMemories()){
+				System.out.println("Slot :" +m.getSlot() +" ---- id :"+ m.getId());
+				System.out.println("mid :"+m.getMachineId());
+			}
+			inventoryService.updateInventory(localMachine);
+			machineRepository.saveCacheInventory(localMachine);
+		}
 
 	}
-	/*
+/*
 	@Test
 	public void getMachineTest(){
 		MachineDTO machineDTO = inventoryService.getMachineById(2);

@@ -1,5 +1,6 @@
 package com.SmartInventoryClient;
 
+import com.SmartInventoryClient.model.StorageUnit;
 import com.SmartInventoryClient.service.DTO.StorageUnitDTO;
 import com.SmartInventoryClient.service.StorageUnitInfoService;
 import org.junit.Test;
@@ -20,8 +21,8 @@ public class StorageUnitInfoServiceTest {
     @Test
     public void testServiceDisk(){
 
-        List<StorageUnitDTO> diskDTOList = storageUnitInfoService.getListStorageUnit();
-        for (StorageUnitDTO disk : diskDTOList){
+        List<StorageUnit> diskDTOList = storageUnitInfoService.getListStorageUnit();
+        for (StorageUnit disk : diskDTOList){
 
             System.out.println();
             System.out.println("model : "+disk.getModel());

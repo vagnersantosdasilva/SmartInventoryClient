@@ -12,11 +12,11 @@ public class OperationalSystem  {
     private String status;
     private String version;
     private String installDate;
-    private String lastBoot;
+
 
 
     public OperationalSystem(Integer id, Integer machineId, String name, String sysUpdate,
-                             String hostname, String status, String version, String installDate, String lastBoot) {
+                             String hostname, String status, String version, String installDate) {
         this.id = id;
         this.machineId = machineId;
         this.name = name;
@@ -25,7 +25,7 @@ public class OperationalSystem  {
         this.status = status;
         this.version = version;
         this.installDate = installDate;
-        this.lastBoot = lastBoot;
+
     }
 
     public OperationalSystem(){}
@@ -103,13 +103,6 @@ public class OperationalSystem  {
         this.installDate = installDate;
     }
 
-    public String getLastBoot() {
-        return lastBoot;
-    }
-
-    public void setLastBoot(String lastBoot) {
-        this.lastBoot = lastBoot;
-    }
 
     @Override
     public boolean equals(Object o) {

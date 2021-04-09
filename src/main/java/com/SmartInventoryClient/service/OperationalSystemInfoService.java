@@ -24,7 +24,7 @@ public class OperationalSystemInfoService {
             OpSystemDTO dto = (OpSystemDTO) beanUtilReflection.returnBean(returnCommand, OpSystemDTO.class,"=");
             OperationalSystem op = new OperationalSystem(null,
                     null, dto.getDistributorId(),dto.getDescription(),dto.getHostname(),
-                    null,dto.getRelease(),null,dto.getUpTime());
+                    null,dto.getRelease(),null);
             return op;
         } catch (Exception e) {
             e.printStackTrace();

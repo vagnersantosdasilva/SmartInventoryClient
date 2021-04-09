@@ -1,7 +1,4 @@
 package com.SmartInventoryClient;
-
-
-
 import com.SmartInventoryClient.util.BeanUtilReflection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

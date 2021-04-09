@@ -1,20 +1,27 @@
-package com.SmartInventoryClient.facade;
+package com.SmartInventoryClient;
+
+import com.SmartInventoryClient.facade.ChangeMonitorFacade;
 import com.SmartInventoryClient.model.Memory;
-import com.SmartInventoryClient.model.MotherBoard;
 import com.SmartInventoryClient.model.OperationalSystem;
 import com.SmartInventoryClient.model.Software;
 import com.SmartInventoryClient.repository.MachineRepository;
 import com.SmartInventoryClient.service.*;
 import com.SmartInventoryClient.service.DTO.MachineDTO;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.validation.executable.ValidateOnExecution;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ValidateOnExecution
-public class ChangeMonitorFacade {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class FacadeTest {
+
     private ChangeMonitorFacade instance;
 
     @Autowired
@@ -42,8 +49,12 @@ public class ChangeMonitorFacade {
     InventoryService inventoryService;
 
 
-
+    @Test
     public void main (){
+
+        /*
+        * Filtrar de listas valores com status deleted antes de comparar com inventário atual
+        * */
 
         MachineDTO localMachine =createInventory();//machineRepository.getCurrentInventory();
         MachineDTO remoteMachine = (cacheRemoteMachine(localMachine));
@@ -78,7 +89,7 @@ public class ChangeMonitorFacade {
         machine.setProcessor(processorInfoService.getProcessor());
         machine.setSoftwares(appsInfoService.getListApps());
 
-        //machine.setStorageUnits(storageUnitInfoService.getListStorageUnit());
+        machine.setStorageUnits(storageUnitInfoService.getListStorageUnit());
         return machine;
     }
 
@@ -108,9 +119,20 @@ public class ChangeMonitorFacade {
                     return e;
                 }).collect(Collectors.toList());
 
+        receiver.getStorageUnits().stream()
+                .map(e->{
+                    if (send.getStorageUnits().contains(e)) {
+                        Integer i = send.getStorageUnits().indexOf(e);
+                        e.setId(send.getStorageUnits().get(i).getId());
+                        e.setMachineId(send.getStorageUnits().get(i).getMachineId());
+                    }
+                    return e;
+                }).collect(Collectors.toList());
+
         return  receiver;
     }
 
+    //marcar mudanças
     private MachineDTO updateLists(MachineDTO instant,MachineDTO previw ){
         List<Memory> newMemories =  instant.getMemories().stream()
                 .filter( e -> !previw.getMemories().contains(e) )
@@ -146,9 +168,22 @@ public class ChangeMonitorFacade {
         removeSoftware.addAll(newSoftwares);
         instant.setSoftwares(removeSoftware);
 
+
         return instant;
 
     }
 
+    private void compareInventory(){
+        MachineDTO currentInventory = machineRepository.getCurrentInventory();
+        MachineDTO remoteInventory = machineRepository.getInventoryFromCache();
+        if (!currentInventory.equals(remoteInventory)) {
+            List<Software> softwareList = currentInventory.getSoftwares();
+            List<Memory> memoryList = currentInventory.getMemories();
+            OperationalSystem op = currentInventory.getOperationalSystem();
 
+        }
+    }
+    private void inventoryCacheUpdate(){
+
+    }
 }
